@@ -1,10 +1,13 @@
 FROM java:8
 MAINTAINER akash1810
 
+ARG SBT_VERSION=0.13.9
+ENV SBT_VERSION ${SBT_VERSION}
+
 RUN mkdir /usr/local/etc/sbt
 WORKDIR /usr/local/etc/sbt
 
-RUN wget --quiet https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/sbt-launch/0.13.9/sbt-launch.jar
+RUN wget --quiet https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/sbt-launch/${SBT_VERSION}/sbt-launch.jar
 
 RUN echo '#!/bin/bash' > sbt
 RUN echo 'SBT_OPTS="-Xms512M -Xmx1536M -Xss1M -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=256M"' >> sbt
